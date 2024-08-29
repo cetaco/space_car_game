@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://0tnlhlxlqxgq"]
+
+[ext_resource type="MeshLibrary" uid="uid://dxga8cdto0tc" path="res://mesh.tres" id="1_a1mla"]
+[ext_resource type="Script" path="res://scenes/VehicleBody3D.gd" id="2_sqn4l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cn78t"]
+
+[sub_resource type="Sky" id="Sky_uc8mt"]
+sky_material = SubResource("ProceduralSkyMaterial_cn78t")
+
+[sub_resource type="Environment" id="Environment_uv4qa"]
+background_mode = 2
+sky = SubResource("Sky_uc8mt")
+
+[sub_resource type="BoxMesh" id="BoxMesh_kp6dy"]
+size = Vector3(0.355, 0.13, 0.62)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7l6io"]
+points = PackedVector3Array(0.1775, 0.065, 0.31, 0.1775, -0.065, 0.31, 0.1775, 0.065, -0.31, -0.1775, 0.065, 0.31, -0.1775, -0.065, 0.31, 0.1775, -0.065, -0.31, -0.1775, 0.065, -0.31, -0.1775, -0.065, -0.31)
+
+[node name="main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.663365, 0.748296, 0, -0.748296, -0.663365, 0, 4.63716, 1.63128)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.861992, 0.506922, 0, -0.506922, 0.861992, 0, 1.747, 1.631)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uv4qa")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_a1mla")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(0, 65535, 0, 0, 0, 655361, 0, 1, 655361, 0, 2, 655361, 1, 65535, 1441793, 3, 65535, 1441793, 2, 65535, 1441793, 4, 65535, 1441793, 5, 65535, 1441792, 5, 0, 655361, 5, 1, 655361, 5, 2, 655361, 5, 3, 655361, 5, 4, 655361, 5, 5, 655361, 5, 6, 655361, 5, 7, 655360, 4, 7, 1048577, 3, 7, 1048577, 2, 7, 1048577, 1, 7, 1048577, 0, 7, 1048577, 65535, 7, 1048576, 65535, 6, 1, 65535, 5, 1, 65535, 4, 1, 65535, 3, 0, 0, 3, 655360)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="VehicleBody3D" type="VehicleBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.506763, 0.901815, 0)
+script = ExtResource("2_sqn4l")
+
+[node name="VehicleWheel3D" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.148183, 0, 0)
+wheel_radius = 0.095
+
+[node name="VehicleWheel3D2" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.148183, 0, -0.416015)
+wheel_radius = 0.095
+
+[node name="VehicleWheel3D3" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667048, 0, -0.416015)
+wheel_radius = 0.095
+
+[node name="VehicleWheel3D4" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667048, 0, 0.000752568)
+wheel_radius = 0.095
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0357314, 0.0748814, -0.204898)
+mesh = SubResource("BoxMesh_kp6dy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0357314, 0.0748814, -0.204898)
+shape = SubResource("ConvexPolygonShape3D_7l6io")

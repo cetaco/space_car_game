@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://cspje78j3els2"]
+
+[ext_resource type="ArrayMesh" uid="uid://cob5w5kimh2pi" path="res://resources/ship_1.res" id="1_aif5g"]
+[ext_resource type="Script" path="res://scripts/ship_model.gd" id="1_wu7uf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_al1kh"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1q5k"]
+size = Vector3(1.36707, 0.29, 1.25497)
+
+[node name="VehicleBody3D" type="VehicleBody3D" node_paths=PackedStringArray("ray_left", "ray_right", "ray_front")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00448789, 0, 0.0414214)
+physics_material_override = SubResource("PhysicsMaterial_al1kh")
+gravity_scale = 0.0
+center_of_mass_mode = 1
+script = ExtResource("1_wu7uf")
+gravity_power = 300.0
+ray_left = NodePath("ray_left")
+ray_right = NodePath("ray_right")
+ray_front = NodePath("ray_front")
+
+[node name="Ship1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.232146)
+mesh = ExtResource("1_aif5g")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0312446, 0.238, -0.0753437)
+shape = SubResource("BoxShape3D_g1q5k")
+
+[node name="back_left" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.903702, -0.428162, 0, 0.428162, 0.903702, 0.573082, -0.131385, -0.668866)
+wheel_radius = 0.204
+wheel_rest_length = 0.33
+suspension_travel = 0.38
+suspension_stiffness = 60.0
+damping_compression = 0.63
+damping_relaxation = 0.42
+
+[node name="back_right" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.903702, -0.428162, 0, 0.428162, 0.903702, -0.636015, -0.131385, -0.668866)
+wheel_radius = 0.204
+wheel_rest_length = 0.33
+suspension_travel = 0.38
+suspension_stiffness = 60.0
+damping_compression = 0.63
+damping_relaxation = 0.42
+
+[node name="front_left" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.897359, 0.441302, 0, -0.441302, 0.897359, 0.573082, -0.137833, 0.643264)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.204
+wheel_rest_length = 0.33
+suspension_travel = 0.38
+suspension_stiffness = 60.0
+damping_compression = 0.63
+damping_relaxation = 0.42
+
+[node name="front_right" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.897359, 0.441302, 0, -0.441302, 0.897359, -0.636015, -0.137833, 0.643264)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.204
+wheel_rest_length = 0.33
+suspension_travel = 0.38
+suspension_stiffness = 60.0
+damping_compression = 0.63
+damping_relaxation = 0.42
+
+[node name="ray_front" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999127, -0.0417882, 0, 0.0417882, 0.999127, 0, 0.296667, -0.00213084)
+target_position = Vector3(0.01, 1.195, 10)
+debug_shape_custom_color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[node name="ray_left" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.994694, 0.102879, 0, -0.102879, 0.994694, 0, 0.265764, 0.00106542)
+target_position = Vector3(3, -0.08, 2)
+
+[node name="ray_right" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.994694, 0.102879, 0, -0.102879, 0.994694, 0, 0.265764, 0.00106542)
+target_position = Vector3(-3, -0.08, 2)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.128038, -0.213183)
+light_color = Color(0.447059, 0.411765, 0.231373, 1)

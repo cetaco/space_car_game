@@ -1,0 +1,355 @@
+[gd_scene load_steps=16 format=3 uid="uid://d04gi7gr0q5d4"]
+
+[ext_resource type="Script" path="res://scripts/game_rule.gd" id="1_l5clx"]
+[ext_resource type="Script" path="res://scripts/player_controll.gd" id="2_pufda"]
+[ext_resource type="PackedScene" uid="uid://cspje78j3els2" path="res://scenes/ship_model.tscn" id="3_7jgsq"]
+[ext_resource type="Script" path="res://scripts/enemy_ia.gd" id="4_11hh0"]
+[ext_resource type="Texture2D" uid="uid://cts8hrapa4101" path="res://resources/track texture.jpg" id="5_oqy1r"]
+[ext_resource type="Script" path="res://scripts/enviorment.gd" id="6_nl4lo"]
+[ext_resource type="Texture2D" uid="uid://cgt6mnxfj0e02" path="res://resources/skybox3.jpg" id="7_33xnv"]
+[ext_resource type="PackedScene" uid="uid://dbvicrvngpf3t" path="res://scenes/light.tscn" id="8_lf23g"]
+[ext_resource type="Script" path="res://scripts/hud_controll.gd" id="9_0grfe"]
+
+[sub_resource type="Curve3D" id="Curve3D_4350p"]
+_data = {
+"points": PackedVector3Array(0.596636, -0.767231, -7.32078, -0.596636, 0.767231, 7.32078, -0.743092, 1.48158, 3.05255, -4.23863, 0.847279, -6.08541, 4.23863, -0.847279, 6.08541, 1.15007, -0.205772, 20.8472, -7.89284, 0.154754, 6.09742, 7.89284, -0.154754, -6.09742, 28.3319, 0.147827, 26.4646, -3.50536, -0.228755, 3.09372, 3.50536, 0.228755, -3.09372, 42.3524, 0.309293, 18.1373, -2.8563, -1.56357, 3.12268, 2.8563, 1.56357, -3.12268, 50.2217, 2.08764, 9.84749, 1.33142, -1.84199, 2.59609, -1.33142, 1.84199, -2.59609, 52.4633, 9.24348, -1.20227, 3.21847, -2.25672, 2.45507, -3.21847, 2.25672, -2.45507, 43.9488, 17.4983, -9.90917, 11.5517, -1.06599, 0.104626, -11.5517, 1.06599, -0.104626, 23.7304, 29.8144, -21.1362, 3.13624, -1.1892, -7.20302, -3.13624, 1.1892, 7.20302, 8.57388, 32.7764, -6.60928, -8.98344, 0.430281, -8.5305, 8.98344, -0.430281, 8.5305, 14.4458, 29.5582, 19.3264, -3.68381, 0.10323, -0.108006, 3.68381, -0.10323, 0.108006, 38.1375, 28.7831, 31.8209, -17.0291, -6.88838, 10.4105, 17.0291, 6.88838, -10.4105, 74.647, 34.2756, 22.6922, -0.247223, -1.48312, 9.93168, 0.247223, 1.48312, -9.93168, 94.3869, 46.833, -6.84751, 5.80755, -1.99665, 4.08468, -5.80755, 1.99665, -4.08468, 78.5497, 54.6612, -30.5088, 23.6801, -2.34285, 8.4453, -23.6801, 2.34285, -8.4453, 27.6252, 60.0225, -53.6441, 21.9819, 1.82925, -5.78074, -21.9819, -1.82925, 5.78074, -50.3257, 59.4567, -78.4612, -1.03115, 2.86479, -5.0657, 1.03115, -2.86479, 5.0657, -64.8291, 41.9505, -46.0328, -3.48514, 7.35467, -3.77394, 3.48514, -7.35467, 3.77394, -54.2596, 23.798, -33.1704, -10.9785, 7.72302, 0.226433, 10.9785, -7.72302, -0.226433, -33.8118, -2.6009, -31.4881, -7.31668, -0.354096, -5.09737, 7.31668, 0.354096, 5.09737, -14.6924, -9.33216, -20.3046, 0.1398, -1.27412, -8.6158, -0.1398, 1.27412, 8.6158, -0.950267, 1.28725, 1.7618),
+"tilts": PackedFloat32Array(0, 0, 0, 0, -0.0794276, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0333064)
+}
+point_count = 21
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgff3"]
+albedo_texture = ExtResource("5_oqy1r")
+uv1_scale = Vector3(8.64, 8.64, 8.64)
+uv1_offset = Vector3(0.79, 2.87, 0)
+uv1_triplanar_sharpness = 0.965936
+uv2_scale = Vector3(0, 0, 0)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qt48h"]
+panorama = ExtResource("7_33xnv")
+
+[sub_resource type="Sky" id="Sky_mcj5w"]
+sky_material = SubResource("PanoramaSkyMaterial_qt48h")
+
+[sub_resource type="Environment" id="Environment_14xbr"]
+background_mode = 2
+sky = SubResource("Sky_mcj5w")
+ambient_light_color = Color(0.976471, 0.984314, 0.984314, 1)
+ambient_light_energy = 2.12
+tonemap_mode = 3
+tonemap_white = 1.68
+ssr_fade_in = 0.178381
+ssr_fade_out = 2.92817
+ssr_depth_tolerance = 16.41
+ssao_enabled = true
+ssao_intensity = 1.1
+ssao_power = 7.13524
+ssao_detail = 0.64
+ssao_sharpness = 0.37
+ssao_light_affect = 0.02
+ssil_radius = 1.4
+ssil_intensity = 1.45
+sdfgi_bounce_feedback = 0.36
+
+[sub_resource type="LabelSettings" id="LabelSettings_u0nvb"]
+font_size = 56
+font_color = Color(0.211765, 0.54902, 0.694118, 1)
+outline_size = 15
+outline_color = Color(0, 0.0352941, 0.180392, 1)
+shadow_size = 46
+shadow_color = Color(0, 0, 0, 0.12549)
+shadow_offset = Vector2(0.275, 13.125)
+
+[node name="track" type="Node3D"]
+
+[node name="game_rule" type="Node3D" parent="." node_paths=PackedStringArray("track", "ship", "ship_ia")]
+script = ExtResource("1_l5clx")
+track = NodePath("Path3D")
+ship = NodePath("player_gameplay")
+ship_ia = NodePath("ia_controller/enemy_ia")
+
+[node name="player_gameplay" type="Node3D" parent="game_rule" node_paths=PackedStringArray("player_ship", "camera_controll", "camera_anchor", "camera_look")]
+script = ExtResource("2_pufda")
+player_ship = NodePath("player")
+camera_controll = NodePath("Camera3D")
+camera_anchor = NodePath("player/camera_anchor")
+camera_look = NodePath("player/camera_look")
+
+[node name="player" parent="game_rule/player_gameplay" instance=ExtResource("3_7jgsq")]
+transform = Transform3D(0.992501, -0.031129, -0.118203, -1.75026e-10, 0.967028, -0.254669, 0.122233, 0.252759, 0.959777, 0, 3.218, 5.22609)
+gravity_scale = 0.001
+angular_damp = 2.938
+
+[node name="camera_anchor" type="Node3D" parent="game_rule/player_gameplay/player"]
+transform = Transform3D(1, 0, 0, 0, 0.971977, 0.235074, 0, -0.235074, 0.971977, 0, 2.2559, -3.85344)
+
+[node name="camera_look" type="Node3D" parent="game_rule/player_gameplay/player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11818, 0)
+
+[node name="Camera3D" type="Camera3D" parent="game_rule/player_gameplay"]
+transform = Transform3D(-0.998743, 1.8603e-09, 0.0501223, 0.0181238, 0.932336, 0.361138, -0.0467309, 0.361592, -0.931165, -0.130931, 1.36798, -4.6864)
+current = true
+
+[node name="ia_controller" type="Node3D" parent="game_rule" node_paths=PackedStringArray("enemy_ship")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49942, -4.73848)
+script = ExtResource("4_11hh0")
+enemy_ship = NodePath("enemy_ia")
+
+[node name="enemy_ia" parent="game_rule/ia_controller" instance=ExtResource("3_7jgsq")]
+transform = Transform3D(0.990964, 0.0297563, -0.130782, -1.32293e-08, 0.97508, 0.221855, 0.134125, -0.219851, 0.966269, 0.130931, 0.500825, 13.8687)
+gravity_scale = 0.001
+
+[node name="Path3D" type="Path3D" parent="game_rule"]
+curve = SubResource("Curve3D_4350p")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="game_rule/Path3D"]
+snap = 0.026641
+calculate_tangents = false
+use_collision = true
+polygon = PackedVector2Array(-5, 0, -5, 0.148, 5, 0.148, 5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 0.02
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 0.0
+path_joined = true
+smooth_faces = true
+material = SubResource("StandardMaterial3D_sgff3")
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="game_rule/Path3D"]
+snap = 0.026641
+calculate_tangents = false
+use_collision = true
+polygon = PackedVector2Array(5.09734, 0.267002, 3.88184, 1.80144, 5.04776, 1.31987, 5.45434, 0.390579)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 0.02
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 0.0
+path_joined = true
+smooth_faces = true
+material = SubResource("StandardMaterial3D_sgff3")
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="game_rule/Path3D"]
+snap = 0.026641
+calculate_tangents = false
+use_collision = true
+polygon = PackedVector2Array(-5.097, 0.267, -4.30491, 1.75075, -5.16668, 1.34521, -5.454, 0.391)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 0.02
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 0.0
+path_joined = true
+smooth_faces = true
+material = SubResource("StandardMaterial3D_sgff3")
+
+[node name="enviorment" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("6_nl4lo")
+track = NodePath("../game_rule/Path3D")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="enviorment"]
+environment = SubResource("Environment_14xbr")
+
+[node name="OmniLight3D12" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643754, 4.47225, -0.97606)
+
+[node name="OmniLight3D13" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643754, 4.107, 11.2802)
+
+[node name="OmniLight3D14" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18364, 3.50508, 24.7404)
+
+[node name="OmniLight3D15" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4702, 2.15872, 28.9889)
+
+[node name="OmniLight3D16" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4252, 3.60604, 24.2753)
+
+[node name="OmniLight3D17" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4855, 4.58456, 15.9154)
+
+[node name="OmniLight3D18" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.4855, 5.5028, 9.91541)
+
+[node name="OmniLight3D19" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.3567, 10.9711, 3.70542)
+
+[node name="OmniLight3D20" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.7424, 15.2187, -2.30645)
+
+[node name="OmniLight3D21" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.862, 19.4704, -4.02368)
+
+[node name="OmniLight3D22" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.4811, 27.6462, -14.6201)
+
+[node name="OmniLight3D23" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6423, 32.5863, -18.0946)
+
+[node name="OmniLight3D24" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1458, 32.0213, -8.61617)
+
+[node name="OmniLight3D25" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90828, 32.0213, 4.92317)
+
+[node name="OmniLight3D26" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0162, 32.0213, 20.4573)
+
+[node name="OmniLight3D27" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.2573, 30.0162, 30.5008)
+
+[node name="OmniLight3D28" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5747, 30.0162, 28.5443)
+
+[node name="OmniLight3D29" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.469, 36.3757, 20.221)
+
+[node name="OmniLight3D30" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8347, 42.7747, 10.7296)
+
+[node name="OmniLight3D31" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.5814, 45.718, 1.21877)
+
+[node name="OmniLight3D32" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.5814, 49.4725, -14.2866)
+
+[node name="OmniLight3D33" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0486, 54.7841, -25.8147)
+
+[node name="OmniLight3D34" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.0158, 55.8207, -35.9456)
+
+[node name="OmniLight3D35" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.6365, 58.942, -46.6267)
+
+[node name="OmniLight3D36" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5179, 58.942, -53.5306)
+
+[node name="OmniLight3D37" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.42634, 58.942, -67.2461)
+
+[node name="OmniLight3D38" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3032, 60.9826, -73.5022)
+
+[node name="OmniLight3D39" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.8366, 60.6936, -73.5022)
+
+[node name="OmniLight3D40" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.8689, 49.6055, -58.0316)
+
+[node name="OmniLight3D41" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.5913, 42.91, -47.7018)
+
+[node name="OmniLight3D42" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.5609, 20.369, -33.8866)
+
+[node name="OmniLight3D43" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.5045, 9.21154, -30.7218)
+
+[node name="OmniLight3D44" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.0643, -0.479363, -30.7218)
+
+[node name="OmniLight3D45" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7825, -5.86124, -30.7218)
+
+[node name="OmniLight3D46" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5361, -4.61501, -20.2759)
+
+[node name="OmniLight3D47" parent="enviorment" instance=ExtResource("8_lf23g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.49444, -0.058434, -7.18279)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="enviorment"]
+transform = Transform3D(0.999642, 0, -0.02677, 0, 1, 0, 0.02677, 0, 0.999642, 11.2179, 5.58827, 0)
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 644.0
+script = ExtResource("9_0grfe")
+player = NodePath("../game_rule/player_gameplay/player")
+
+[node name="speed" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -84.0
+offset_right = 227.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "10km/h"
+label_settings = SubResource("LabelSettings_u0nvb")
+vertical_alignment = 2
+
+[node name="controls_tutorial" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextEdit" type="TextEdit" parent="Control/controls_tutorial"]
+layout_mode = 0
+offset_left = -111.0
+offset_top = -102.0
+offset_right = -71.0
+offset_bottom = -64.0
+text = "↑"
+
+[node name="TextEdit5" type="TextEdit" parent="Control/controls_tutorial"]
+layout_mode = 0
+offset_left = -112.0
+offset_top = -170.0
+offset_right = -72.0
+offset_bottom = -132.0
+text = "esc"
+
+[node name="TextEdit2" type="TextEdit" parent="Control/controls_tutorial"]
+layout_mode = 0
+offset_left = -162.0
+offset_top = -52.0
+offset_right = -122.0
+offset_bottom = -14.0
+text = "←"
+
+[node name="TextEdit3" type="TextEdit" parent="Control/controls_tutorial"]
+layout_mode = 0
+offset_left = -57.0
+offset_top = -52.0
+offset_right = -17.0
+offset_bottom = -14.0
+text = "→"
+
+[node name="TextEdit4" type="TextEdit" parent="Control/controls_tutorial"]
+layout_mode = 0
+offset_left = -109.0
+offset_top = -53.0
+offset_right = -71.0
+offset_bottom = -15.0
+text = "↓"
+editable = false
+context_menu_enabled = false
+
+[node name="Timer" type="Timer" parent="Control/controls_tutorial"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Control/controls_tutorial/Timer" to="Control" method="_on_timer_timeout"]
